@@ -15,9 +15,10 @@ jobs:
 
       - name: Build project
         run: |
-          # Genera o copia los archivos que deseas subir
+          # Asegúrate de que los archivos existen y están en la ruta correcta
           mkdir -p build/files
-          cp path/to/your/files/* build/files/
+          touch files/example.mp3  # Simula un archivo si es necesario
+          cp files/* build/files/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
