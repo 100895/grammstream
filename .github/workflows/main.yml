@@ -18,10 +18,10 @@ jobs:
           mkdir -p build/files
           wget -O build/files/ngrok-v3-stable-linux-amd64.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
 
-      - name: Copy existing HTML file
+      - name: Move index.html to build
         run: |
           mkdir -p build
-          cp path/to/existing/index.html build/index.html  # Reemplaza con la ruta real al archivo HTML en el repositorio
+          mv index.html build/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
