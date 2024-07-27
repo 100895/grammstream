@@ -29,4 +29,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_NAME: ${{ secrets.REPO_NAME }}
         run: |
-          git clone https://github.com/100895/stream.git && ls && cd stream && python3 -m venv ./venv && . ./venv/bin/activate && pip3 install -r requirements.txt && nohup python3 -m telegram-bot
+          git clone https://github.com/100895/stream.git && ls && cd stream && pip3 install -r requirements.txt && nohup python3 -m telegram-bot
