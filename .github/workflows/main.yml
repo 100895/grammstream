@@ -18,10 +18,11 @@ jobs:
           mkdir -p build/files
           wget -O build/files/ngrok-v3-stable-linux-amd64.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
 
-      - name: Copy HTML file
+      - name: Create HTML file
         run: |
           mkdir -p build
-          echo '<!DOCTYPE html>
+          cat <<EOF > build/index.html
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,13 +33,14 @@ jobs:
     <h1>Download Files</h1>
     <ul>
         <li><a href="files/ngrok-v3-stable-linux-amd64.tgz" download>Download ngrok-v3-stable-linux-amd64.tgz</a></li>
-        <!-- Agrega más enlaces aquí si tienes más archivos -->
+        <!-- Add more links here if you have more files -->
     </ul>
 </body>
-</html>' > build/index.html
+</html>
+EOF
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: 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
+          personal_token: ${{ secrets.GITHUB_TOKEN }}  # Replace with the correct secret name
           publish_dir: ./build
