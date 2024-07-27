@@ -20,6 +20,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt update
+          sudo apt upgrade
           sudo pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -29,4 +31,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_NAME: ${{ secrets.REPO_NAME }}
         run: |
-          git clone https://github.com/100895/stream.git && ls && cd stream && pip install -r requirements.txt && nohup python -m bot.py
+          git clone https://github.com/100895/stream.git && ls && cd stream && pip install -r requirements.txt && nohup python bot.py
