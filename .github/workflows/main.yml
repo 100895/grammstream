@@ -28,3 +28,8 @@ jobs:
         with:
           personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: ./build
+
+      - name: Keep runner active
+        run: |
+          echo "Keeping runner active..."
+          while true; do sleep 30; done
