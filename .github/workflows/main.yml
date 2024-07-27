@@ -13,23 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Download ngrok
-        run: |
-          mkdir -p build/files
-          wget -O build/files/ngrok-v3-stable-linux-amd64.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
-
-      - name: Move index.html to build
-        run: |
-          mkdir -p build
-          mv index.html build/index.html
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          personal_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          publish_dir: ./build
+          python-version: '3.8'
 
-      - name: Keep runner active
+      - name: Install dependencies
         run: |
-          echo "Keeping runner active..."
-          while true; do sleep 30; done
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run the bot
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME: ${{ secrets.REPO_NAME }}
+        run: |
+          python bot.py
